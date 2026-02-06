@@ -28,10 +28,36 @@ SELECT COUNT(*) AS AntallStillinger
         FROM ansatt0
          ) AS StillingerIBruk;
 
+
+/*
+Print de ansatte som tjener mer enn ALLE Sekretærer
+SELECT * FROM ansatt0 WHERE "lØnn" > ALL
+    (SELECT "lØnn" FROM ansatt0 WHERE stilling='Sekretær');
+
+Print de ansatte som tjener mer enn MINST EN Sekretær
+SELECT * FROM ansatt0 WHERE "lØnn" > SOME
+    (SELECT "lØnn" FROM ansatt0 WHERE stilling='Sekretær');
+
+Kan også løses med MAX:
+SELECT * FROM ansatt0 WHERE "lØnn" > (SELECT MAX("lØnn") FROM ansatt0 WHERE stilling='Sekretær);
+*/
+
 /*
  IN - ∈
- IN avgjør om en verdi er med ien mengde, og tilstaverer ∈ fra mengdelære
+ IN avgjør om en verdi er med i en mengde, og tilstaverer ∈ fra mengdelære
  Spørring for å finne kunde med en eller flere tilhørende ordrer:
 
  SELECT * FROM KUNDE WHERE KNr IN (SELECT KNr FROM Ordre);
+
+ SELECT * FROM Kunde WHERE KNr NOT IN (SELECT KNr FROM Ordre); // Negasjon ved bruk av NOT
+
+ SELECT * FROM Vare WHERE KatNr IN (2,4,7); // Bruke IN for å forenkle OR-betingelser;
+ */
+
+ /*
+ EXISTS sjekker om en delspørring gir et ikke-tomt svar
+ SELECT A.* FROM ansatt as A
+    WHERE NOT EXISTS(
+    SELECT * FROM prosjektdeltakelse AS PD
+    WHERE PD.AnsNr = A.AnsNR);
  */
