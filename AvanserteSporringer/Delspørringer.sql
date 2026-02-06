@@ -61,3 +61,22 @@ SELECT * FROM ansatt0 WHERE "lØnn" > (SELECT MAX("lØnn") FROM ansatt0 WHERE st
     SELECT * FROM prosjektdeltakelse AS PD
     WHERE PD.AnsNr = A.AnsNR);
  */
+
+
+/*
+GROUP BY CUBE brukes for å beregne subtotaler
+
+SELECT VNr, FylkeNr, SUM(Antall) AS Samlet
+    FROM Salgstall
+    GROUP BY CUBE (VNr, FylkeNr)
+
+GROUP BY ROLLUP ligner, men gir ikke alle variantene av subtotaler.
+
+Vindusjunskjoner kan brukes for å vise enkeltrader sammen med aggregerte data
+
+Akkummulert
+Kumulativ statistikk, f.eks akkumulert nedbør
+
+SELECT Dato, Nedbør, SUM(Nedbør) OVER (ORDER BY Dato ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+    AS Akkumulert FROM DagligNedbør;
+ */
