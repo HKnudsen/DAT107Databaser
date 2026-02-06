@@ -76,7 +76,15 @@ Vindusjunskjoner kan brukes for å vise enkeltrader sammen med aggregerte data
 
 Akkummulert
 Kumulativ statistikk, f.eks akkumulert nedbør
-
+Fra start til current row
 SELECT Dato, Nedbør, SUM(Nedbør) OVER (ORDER BY Dato ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
     AS Akkumulert FROM DagligNedbør;
- */
+*/
+
+/*
+Glidende snitt
+3 dager tilbake i tid, og 3 dager frem i tid
+SELECT DATO, Nedbør, AVG(Nedbør)
+    OVER (ORDERED BY Dato ROWS BETWEEN 3 PRECEDIING AND 3 FOLLOWING) AS UkeSnitt
+        FROM DagligNedbør;
+*/
